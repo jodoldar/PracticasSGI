@@ -32,7 +32,7 @@ void init()
 	float desplazamiento = PI / 2;
 
 	glBegin(GL_TRIANGLE_STRIP);
-	//Crear las coordenadas
+	// Primer triangulo
 	glVertex3f(0.0, 1.0, 0.0);
 	glVertex3f(0.866, -0.5, 0.0);
 	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
@@ -48,20 +48,43 @@ void init()
 	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
 	glVertex3f(-0.866, -0.5, 0.0);
 	glVertex3f(0.0, 1.0, 0.0);
-	/**glVertex3f(radioInterno*cos(0 * (2 * PI) / 3 + desplazamiento), -sin(0 * (2 * PI) / 3 + desplazamiento),0.0);
-	glVertex3f(radioExterno*cos(0 * (2 * PI) / 3 + desplazamiento), -sin(0 * (2 * PI) / 3 + desplazamiento), 0.0);
-
-	glVertex3f(radioInterno*cos(1 * (2 * PI) / 3 + desplazamiento), -sin(1 * (2 * PI) / 3 + desplazamiento),0.0);
-	glVertex3f(radioExterno*cos(1 * (2 * PI) / 3 + desplazamiento), -sin(1 * (2 * PI) / 3 + desplazamiento), 0.0);
-
-	glVertex3f(radioInterno*cos(2 * (2 * PI) / 3 + desplazamiento), -sin(2 * (2 * PI) / 3 + desplazamiento),0.0);
-	glVertex3f(radioExterno*cos(2*(2 * PI) / 3 + desplazamiento), -sin(2*(2 * PI) / 3 + desplazamiento),0.0);
-	*/
+	glEnd(); glBegin(GL_TRIANGLE_STRIP);
 	
-	/*for (int i = 0; i < 6; i++) {
-		glVertex3f(radioExterno*cos((i*PI/3 + desplazamiento) * 2 * PI / 6), radioExterno*sin((i*PI/3 + desplazamiento) * 2 * PI / 6), 0.0);
-		//glVertex3f(radioInterno*cos((i*PI/6 + desplazamiento) * 2 * PI / 3), radioInterno*sin((i*PI/6 + desplazamiento) * 2 * PI / 3), 0.0);
-	}*/
+	// Segundo triangulo
+	glVertex3f(-0.866, 0.5, 0.0);
+	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
+	glVertex3f(0.866, 0.5, 0.0);
+	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
+	glVertex3f(0.866*0.7, 0.5*0.7, 0.0);
+
+	glVertex3f(0.866*0.7, 0.5*0.7, 0.0);
+	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
+	glVertex3f(0.866, 0.5, 0.0);
+	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
+	glVertex3f(0.0, -1.0, 0.0);
+
+	glVertex3f(0.0, -1.0, 0.0);
+	glVertex3f(-0.866, 0.5, 0.0);
+	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
+	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
+	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
+	glVertex3f(0.0, -1.0, 0.0);
+	/*
+	
+	glVertex3f(0.866, -0.5, 0.0);
+	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
+	glVertex3f(0.7*0.866, 0.7*(-0.5), 0.0);
+
+	glVertex3f(0.866, -0.5, 0.0);
+	glVertex3f(-0.866, -0.5, 0.0);
+	glVertex3f(0.7*(-0.866), 0.7*(-0.5), 0.0);
+	glVertex3f(0.7*0.866, 0.7*(-0.5), 0.0);
+
+	glVertex3f(0.7*(-0.866), 0.7*(-0.5), 0.0);
+	glVertex3f(-0.866, -0.5, 0.0);
+	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
+	glVertex3f(-0.866, -0.5, 0.0);
+	glVertex3f(0.0, 1.0, 0.0);*/
 	glEnd();
 	
 	glEndList();
