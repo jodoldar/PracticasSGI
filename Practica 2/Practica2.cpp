@@ -13,78 +13,41 @@ Autor: Josep Dols
 
 using namespace std;
 
-static GLfloat coordenadas[12];
-static GLuint estrella2[12] = {0,1,2,3,4,5,6,7,8,9,10,11};
 static GLuint estrella;
-static const GLuint indices[36] = { 0,2,8, 2,10,8, 2,4,10, 4,6,10, 0,6,4, 0,8,6, 1,3,7, 7,3,9, 9,3,5, 9,5,11, 5,11,7, 5,7,1};
 
 void init()
 {
 	cout << "Iniciando " << PROYECTO << endl;
 	cout << "GL Version " << glGetString(GL_VERSION) << endl;
 
-	
-
 	estrella = glGenLists(1);
 	glNewList(estrella, GL_COMPILE);
 
 	float radioExterno = 1.0, radioInterno = 0.7;
-	float desplazamiento = PI / 2;
 
 	glBegin(GL_TRIANGLE_STRIP);
 	// Primer triangulo
 	glVertex3f(0.0, 1.0, 0.0);
+	glVertex3f(radioInterno*0.0, radioInterno*1.0, 0.0);
+	glVertex3f(-0.866, -0.5, 0.0);
+	glVertex3f(radioInterno*(-0.866), radioInterno*(-0.5), 0.0);
 	glVertex3f(0.866, -0.5, 0.0);
-	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
-	glVertex3f(0.7*0.866, 0.7*(-0.5), 0.0);
-
-	glVertex3f(0.866, -0.5, 0.0);
-	glVertex3f(-0.866, -0.5, 0.0);
-	glVertex3f(0.7*(-0.866), 0.7*(-0.5), 0.0);
-	glVertex3f(0.7*0.866, 0.7*(-0.5), 0.0);
-
-	glVertex3f(0.7*(-0.866), 0.7*(-0.5), 0.0);
-	glVertex3f(-0.866, -0.5, 0.0);
-	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
-	glVertex3f(-0.866, -0.5, 0.0);
+	glVertex3f(radioInterno*0.866, radioInterno*(-0.5), 0.0);
 	glVertex3f(0.0, 1.0, 0.0);
-	glEnd(); glBegin(GL_TRIANGLE_STRIP);
+	glVertex3f(radioInterno*0.0, radioInterno*1.0, 0.0);
+	glEnd(); 
+	
+	glBegin(GL_TRIANGLE_STRIP);
 	
 	// Segundo triangulo
-	glVertex3f(-0.866, 0.5, 0.0);
-	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
-	glVertex3f(0.866, 0.5, 0.0);
-	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
-	glVertex3f(0.866*0.7, 0.5*0.7, 0.0);
-
-	glVertex3f(0.866*0.7, 0.5*0.7, 0.0);
+	glVertex3f(0.0, -1.0, 0.0);
 	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
 	glVertex3f(0.866, 0.5, 0.0);
-	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
-	glVertex3f(0.0, -1.0, 0.0);
-
-	glVertex3f(0.0, -1.0, 0.0);
+	glVertex3f(0.866*0.7, 0.5*0.7, 0.0);
 	glVertex3f(-0.866, 0.5, 0.0);
 	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
-	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
-	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
 	glVertex3f(0.0, -1.0, 0.0);
-	/*
-	
-	glVertex3f(0.866, -0.5, 0.0);
-	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
-	glVertex3f(0.7*0.866, 0.7*(-0.5), 0.0);
-
-	glVertex3f(0.866, -0.5, 0.0);
-	glVertex3f(-0.866, -0.5, 0.0);
-	glVertex3f(0.7*(-0.866), 0.7*(-0.5), 0.0);
-	glVertex3f(0.7*0.866, 0.7*(-0.5), 0.0);
-
-	glVertex3f(0.7*(-0.866), 0.7*(-0.5), 0.0);
-	glVertex3f(-0.866, -0.5, 0.0);
-	glVertex3f(0.7*0.0, 0.7*1.0, 0.0);
-	glVertex3f(-0.866, -0.5, 0.0);
-	glVertex3f(0.0, 1.0, 0.0);*/
+	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
 	glEnd();
 	
 	glEndList();
@@ -94,7 +57,7 @@ void display()
 {
 	//cout << "Se produce un evento 'display'\n";
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(0, 0, 1);
+	glColor3f(0, 0, 0.3);
 	// Mandar a dibujar
 	glCallList(estrella);
 	glFlush();
