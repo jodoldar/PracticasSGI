@@ -1,0 +1,36 @@
+﻿  Practica3.cpp
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(29): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(29): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(30): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(30): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(35): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(35): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(252): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(27): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+Practica3.cpp(32): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Practica3.cpp(33): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(34): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Practica3.cpp(35): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(36): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Practica3.cpp(38): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Practica3.cpp(45): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(46): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(47): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(48): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(49): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(51): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(61): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(74): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(88): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(102): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Practica3.cpp(116): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+  Generando código
+  2 of 17 functions (11.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+  Practica 3.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\Practicas SGI\Practica 3\Practica 3.exe

@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica 1", "Practica 1\Practica 1.vcxproj", "{1E34E2A0-14BF-49DA-B02E-1028B7971E12}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Geometria", "Geometria\Geometria.vcxproj", "{E0457705-EC27-43CC-BB1B-75BCA3FB4946}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica 2", "Practica 2\Practica 2.vcxproj", "{2147F610-8A36-4BDA-828E-70D24FE3B805}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica 3", "Practica 3\Practica 3.vcxproj", "{74CDC640-8359-45E6-B310-0FFEDEA6B26E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{2147F610-8A36-4BDA-828E-70D24FE3B805}.Release|x64.Build.0 = Release|x64
 		{2147F610-8A36-4BDA-828E-70D24FE3B805}.Release|x86.ActiveCfg = Release|Win32
 		{2147F610-8A36-4BDA-828E-70D24FE3B805}.Release|x86.Build.0 = Release|Win32
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Debug|x64.ActiveCfg = Debug|x64
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Debug|x64.Build.0 = Debug|x64
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Debug|x86.ActiveCfg = Debug|Win32
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Debug|x86.Build.0 = Debug|Win32
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Release|x64.ActiveCfg = Release|x64
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Release|x64.Build.0 = Release|x64
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Release|x86.ActiveCfg = Release|Win32
+		{74CDC640-8359-45E6-B310-0FFEDEA6B26E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
