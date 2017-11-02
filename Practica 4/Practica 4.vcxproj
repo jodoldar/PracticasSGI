@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{74CDC640-8359-45E6-B310-0FFEDEA6B26E}</ProjectGuid>
-    <RootNamespace>Practica3</RootNamespace>
+    <ProjectGuid>{304F3934-163E-462B-9E34-CBFF074BCE7F}</ProjectGuid>
+    <RootNamespace>Practica4</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(ProjectDir)\</OutDir>
+    <OutDir>$(ProjectDir)</OutDir>
     <IncludePath>C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
@@ -116,7 +116,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Practica3.cpp" />
+    <ClCompile Include="Practica 4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

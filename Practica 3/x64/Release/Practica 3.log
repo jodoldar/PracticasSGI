@@ -1,0 +1,21 @@
+﻿Practica3.obj : error LNK2001: símbolo externo __imp_glutBitmapCharacter sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_GetBits sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutReshapeFunc sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp___glutCreateWindowWithExit sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_GetHeight sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_Unload sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp___glutInitWithExit sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_GetFileType sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutSolidSphere sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_ConvertTo32Bits sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_ConvertFromRawBits sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutInitDisplayMode sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutSolidCone sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_Load sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_Save sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_FreeImage_GetWidth sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutDisplayFunc sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutMainLoop sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutInitWindowPosition sin resolver
+Practica3.obj : error LNK2001: símbolo externo __imp_glutInitWindowSize sin resolver
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\PracticasSGI\Practica 3\\Practica 3.exe : fatal error LNK1120: 20 externos sin resolver
