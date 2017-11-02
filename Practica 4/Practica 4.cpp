@@ -71,7 +71,7 @@ void display()
 		glCallList(estrella);
 		angle += 30;
 		glPopMatrix();
-		cout << "Estrella n " << i + 1 << "Color: " << (float)i / 6 << " " << (float)i/6 << " " << (float)(6-i)/6 << endl;
+		//cout << "Estrella n " << i + 1 << "Color: " << (float)i / 6 << " " << (float)i/6 << " " << (float)(6-i)/6 << endl;
 	}
 
 	glFlush();
@@ -88,7 +88,7 @@ void onReshape(GLint w, GLint h)
 	glLoadIdentity();
 
 	float ratio = (float)w / h;
-	cout << "Aspect Ratio: " << ratio << endl;
+	//cout << "Aspect Ratio: " << ratio << endl;
 
 	/*CAMARA ORTOGRAFICA
 		Ajustamos la vista a la dimension mas pequeña del viewport para
