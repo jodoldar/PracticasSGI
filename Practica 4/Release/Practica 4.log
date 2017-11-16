@@ -25,8 +25,8 @@ Practica 4.cpp(45): warning C4305: 'argumento': truncamiento de 'double' a 'GLfl
 Practica 4.cpp(47): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
 Practica 4.cpp(69): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
   Generando código
-  3 of 17 functions (17.6%) were compiled, the rest were copied from previous compilation.
+  17 of 17 functions (100.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Practica 4.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\PracticasSGI\Practica 4\Practica 4.exe
+  Practica 4.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\Practicas SGI\Practica 4\Practica 4.exe
