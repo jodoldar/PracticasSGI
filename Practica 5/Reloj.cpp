@@ -16,10 +16,14 @@ Autor: Josep Dols
 
 using namespace std;
 
-static GLuint marcasHorarias;
+static GLuint aguja;
 
 static float alfa = 0;
 static float alfaSegundos = 0;
+static float alfaMinutos = 0;
+static float alfaHoras = 0;
+static float anguloHoras = 360 / 12;
+static float anguloMinutos = 360 / 60;
 
 void init()
 {
@@ -27,21 +31,30 @@ void init()
 	cout << "GL Version " << glGetString(GL_VERSION) << endl;
 
 	glEnable(GL_DEPTH_TEST);
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	time_t timeval;
+	struct tm lclTime;
 
-	marcasHorarias = glGenLists(1);
-	glNewList(marcasHorarias, GL_COMPILE);
-	glBegin(GL_TRIANGLE_STRIP);
-	glVertex3f(0.0, -1.0, 0.0);
-	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
-	glVertex3f(0.866, 0.5, 0.0);
-	glVertex3f(0.866*0.7, 0.5*0.7, 0.0);
-	glVertex3f(-0.866, 0.5, 0.0);
-	glVertex3f(-0.866*0.7, 0.5*0.7, 0.0);
-	glVertex3f(0.0, -1.0, 0.0);
-	glVertex3f(0.0*0.7, -1.0*0.7, 0.0);
-	glEnd();
+	time(&timeval);
+	localtime_s(&lclTime, &timeval);
+
+	printf("Current local time and date: %d:%d:%d %d/%d/%d\n", lclTime.tm_hour, lclTime.tm_min, lclTime.tm_sec, lclTime.tm_mday, lclTime.tm_mon+1, 1900+lclTime.tm_year);
+
+	alfaSegundos = (lclTime.tm_sec / 60.0f) * 360;
+	alfaMinutos = (lclTime.tm_min / 60.0f) * 360 + alfaSegundos/360;
+	alfaHoras = ((lclTime.tm_hour%12) / 12.0f) * 360 + 30*(alfaMinutos/360);
+	printf("Angulos: Horas: %f, Minutos: %f, Segundos: %f", alfaHoras, alfaMinutos, alfaSegundos);
+
+	aguja = glGenLists(1);
+	glNewList(aguja, GL_COMPILE);
+		glBegin(GL_TRIANGLES);
+			glVertex3f(0.0, 1.0, 0.0);
+			glVertex3f(1.0, 0.0, 0.0);
+			glVertex3f(-1.0, 0.0, 0.0);
+		glEnd();
 	glEndList();
+
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 void muestraFPS()
@@ -76,39 +89,59 @@ void display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(0, 4, 0, 0, 0, 0, 0, 0, 1);
-
-	ejes();
-
-	//glPushMatrix();
-	glColor3f(0, 1, 0);
-	glScalef(0.25, 0.25, 0.25);
-	glRotatef(180, 0, 0, 1);
+	gluLookAt(-4, 4, 4, 0, 0, 0, 0, 0, 1);
+	glScalef(0.9f, 0.9f, 0.9f);
+	// Dibujo de las marcas horarias
+	glColor3f(0, 1, 1);
 	for (int i = 0; i < 12; i++) {
-		//glTranslatef(1.0, 0.0, 0.0);
-		
-		glRotatef(360/12, 0.0, 1.0, 0.0);
-		//glTranslatef(1.0, 0, 0);
-		glutSolidCone(1, 4, 10, 1);
-		//glCallList(marcasHorarias);
+		glPushMatrix();
+		glRotatef(anguloHoras*i, 0.0f, 1.0f, 0.0f);
+		glScalef(1.0f, 1.0f, 2.0f);
+		glTranslatef(0.0f, 0.0f, 1.0f);
+		glutSolidCube(0.25);
+		glPopMatrix();
 	}
-	//glPopMatrix();
 
-	/*
+	// Dibujo de las marcas de los minutos
+	glColor3f(0, 1, 0);
+	for (int i = 0; i < 60; i++) {
+		if (i % 5 != 0) {
+			glPushMatrix();
+			glRotatef(anguloMinutos*i, 0.0f, 1.0f, 0.0f);
+			glScalef(0.25f, 1.0f, 1.0f);
+			glTranslatef(0.0f, 0.0f, 2.0f);
+			glutSolidCube(0.25);
+			glPopMatrix();
+		}
+	}
+
+	// Dibujo del segundero
+	glColor3f(1, 0, 0);
 	glPushMatrix();
-	glColor3f(0, 0, 1);
-	glTranslatef(1.0f, 0, 0);
-	glRotatef((alfa / 2), 0, 0, 1);
-	glutWireTeapot(0.7);
+	glRotatef(-90, 0.0f, 1.0f, 0.0f);
+	glRotatef(-alfaSegundos, 0.0f, 1.0f, 0.0f);
+	glScalef(0.5f, 0.75f, 0.5f);
+	glTranslatef(4.0f, 0.0f, 0.0f);
+	glutSolidTorus(0.25, 0.6, 30, 30);
 	glPopMatrix();
 
+	// Dibujo del minutero
+	glColor3f(1, 1, 0);
 	glPushMatrix();
-	glColor3f(1, 0, 1);
-	glTranslatef(-1.0f, 0, 0);
-	glRotatef((alfa / 2), 0, 1, 0);
-	glutWireTeapot(0.7);
+	glRotatef(-alfaMinutos, 0.0f, 1.0f, 0.0f);
+	glScalef(1.0f, 1.0f, 2.0f);
+	glutSolidCone(0.25, 1, 10, 10);
 	glPopMatrix();
-	*/
+
+	// Dibujo de las horas
+	glColor3f(1.0, 0.0, 1.0);
+	glPushMatrix();
+	glRotatef(-alfaHoras, 0.0f, 1.0f, 0.0f);
+	glTranslatef(0.0f, 0.25f, 0.0f);
+	glutSolidCone(0.25, 1, 10, 10);
+	glPopMatrix();
+
+	//glFlush();
 	glutSwapBuffers();
 }
 
@@ -147,9 +180,10 @@ void update()
 	//alfa += 0.5;
 	muestraFPS();
 	// Animacion coherente con el tiempo transcurrido
-	static const float omega = 3;	// Vueltas por segundo
-
-									// Inicialmente la hora de arranque
+	static const float omegaSegundos = 1/60.0f;	// Vueltas por segundo
+	static const float omegaMinutos = 1 / 60.0f / 60.0f; // Vueltas por minuto
+	static const float omegaHoras = 1 / 3600.0f / 12.0f; // Vueltas por hora
+	// Inicialmente la hora de arranque
 	static int antes = glutGet(GLUT_ELAPSED_TIME);
 
 	//Hora actual
@@ -158,7 +192,10 @@ void update()
 	// Tiempo transcurrido
 	float tiempo_transcurrido = (ahora - antes) / 1000.0f;
 
-	alfa += omega * 360 * tiempo_transcurrido;
+	alfaSegundos += omegaSegundos * 360 * tiempo_transcurrido;
+	alfaMinutos += omegaMinutos * 360 * tiempo_transcurrido;
+	alfaHoras += omegaHoras * 360 * tiempo_transcurrido;
+
 	antes = ahora;
 	// Encolar un evento de redibujo
 	glutPostRedisplay();
@@ -183,7 +220,7 @@ void main(int argc, char** argv)
 	glutDisplayFunc(display);
 	glutReshapeFunc(onReshape);
 	//glutIdleFunc(update);
-	//glutTimerFunc(1000 / tasaFPS, onTimer, 1000 / tasaFPS);
+	glutTimerFunc(1000 / tasaFPS, onTimer, 1000 / tasaFPS);
 
 	glutMainLoop();
 }

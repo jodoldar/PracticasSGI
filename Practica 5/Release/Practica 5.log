@@ -10,15 +10,9 @@ C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36)
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(252): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Reloj.cpp(36): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Reloj.cpp(37): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Reloj.cpp(38): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Reloj.cpp(39): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Reloj.cpp(40): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Reloj.cpp(42): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
   Generando código
-  2 of 44 functions ( 4.5%) were compiled, the rest were copied from previous compilation.
+  2 of 112 functions ( 1.8%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Practica 5.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\Practicas SGI\Practica 5\Practica 5.exe
+  Practica 5.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\PracticasSGI\Practica 5\Practica 5.exe
