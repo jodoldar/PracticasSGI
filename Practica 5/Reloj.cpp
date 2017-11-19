@@ -24,6 +24,13 @@ static float alfaMinutos = 0;
 static float alfaHoras = 0;
 static float anguloHoras = 360 / 12;
 static float anguloMinutos = 360 / 60;
+static float colorRojoHoras = 0;
+static float colorVerdeHoras = 1;
+static float colorAzulHoras = 1;
+static float cuentaHoras = 0;
+static float cuentaMinutos = 0;
+static float cuentaSegundos = 0;
+static int escala = 0;
 
 void init()
 {
@@ -41,9 +48,12 @@ void init()
 	printf("Current local time and date: %d:%d:%d %d/%d/%d\n", lclTime.tm_hour, lclTime.tm_min, lclTime.tm_sec, lclTime.tm_mday, lclTime.tm_mon+1, 1900+lclTime.tm_year);
 
 	alfaSegundos = (lclTime.tm_sec / 60.0f) * 360;
-	alfaMinutos = (lclTime.tm_min / 60.0f) * 360 + alfaSegundos/360;
+	alfaMinutos = ((lclTime.tm_min) / 60.0f) * 360 + 6*alfaSegundos/360.0f;
 	alfaHoras = ((lclTime.tm_hour%12) / 12.0f) * 360 + 30*(alfaMinutos/360);
 	printf("Angulos: Horas: %f, Minutos: %f, Segundos: %f", alfaHoras, alfaMinutos, alfaSegundos);
+
+	cuentaMinutos = lclTime.tm_min * 60 + lclTime.tm_sec;
+	cuentaHoras = lclTime.tm_hour/12.0f * 60 * 60 + lclTime.tm_min * 60 + lclTime.tm_sec;
 
 	aguja = glGenLists(1);
 	glNewList(aguja, GL_COMPILE);
@@ -73,7 +83,7 @@ void muestraFPS()
 	if (tiempo_transcurrido >= 1000) {
 		// Modificar la barra de titulos
 		stringstream titulo;
-		titulo << "FPS = " << fotogramas;
+		titulo << "Reloj Analogico - FPS = " << fotogramas;
 		glutSetWindowTitle(titulo.str().c_str());
 		// Reinicio la cuenta de fotogramas
 		fotogramas = 0;
@@ -89,29 +99,57 @@ void display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(-4, 4, 4, 0, 0, 0, 0, 0, 1);
+	gluLookAt(0, 4, 0, 0, 0, 0, 0, 0, 1);
+	//glScalef(0.25f, 0.25f, 0.25f);
+
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glTranslatef(0.0f, 0.1f, 0.0f);
+	glutSolidSphere(0.25, 10, 10);
+	glPopMatrix();
+
 	glScalef(0.9f, 0.9f, 0.9f);
 	// Dibujo de las marcas horarias
-	glColor3f(0, 1, 1);
+	glColor3f(colorRojoHoras, colorVerdeHoras, colorAzulHoras);
 	for (int i = 0; i < 12; i++) {
-		glPushMatrix();
-		glRotatef(anguloHoras*i, 0.0f, 1.0f, 0.0f);
-		glScalef(1.0f, 1.0f, 2.0f);
-		glTranslatef(0.0f, 0.0f, 1.0f);
-		glutSolidCube(0.25);
-		glPopMatrix();
+		if (escala) {
+			glPushMatrix();
+			glRotatef(anguloHoras*i, 0.0f, 1.0f, 0.0f);
+			glScalef(1.0f, 1.0f, 0.75f);
+			glTranslatef(0.0f, 0.0f, 2.65f);
+			glutSolidCube(0.25);
+			glPopMatrix();
+		}
+		else {
+			glPushMatrix();
+			glRotatef(anguloHoras*i, 0.0f, 1.0f, 0.0f);
+			glScalef(1.0f, 1.0f, 2.0f);
+			glTranslatef(0.0f, 0.0f, 1.0f);
+			glutSolidCube(0.25);
+			glPopMatrix();
+		}
 	}
 
 	// Dibujo de las marcas de los minutos
-	glColor3f(0, 1, 0);
+	glColor3f(0, 0, 0);
 	for (int i = 0; i < 60; i++) {
-		if (i % 5 != 0) {
+		if (i >= 60-(int)cuentaMinutos/60 && i%5 !=0) {
 			glPushMatrix();
 			glRotatef(anguloMinutos*i, 0.0f, 1.0f, 0.0f);
-			glScalef(0.25f, 1.0f, 1.0f);
+			glScalef(0.35f, 1.0f, 1.0f);
 			glTranslatef(0.0f, 0.0f, 2.0f);
 			glutSolidCube(0.25);
 			glPopMatrix();
+		}
+		else {
+			if (i % 5 != 0) {
+				glPushMatrix();
+				glRotatef(anguloMinutos*i, 0.0f, 1.0f, 0.0f);
+				glScalef(0.25f, 1.0f, 1.0f);
+				glTranslatef(0.0f, 0.0f, 2.0f);
+				glutSolidCube(0.25);
+				glPopMatrix();
+			}
 		}
 	}
 
@@ -126,7 +164,7 @@ void display()
 	glPopMatrix();
 
 	// Dibujo del minutero
-	glColor3f(1, 1, 0);
+	glColor3f(38/256.0f, 174/256.0f, 96/256.0f);
 	glPushMatrix();
 	glRotatef(-alfaMinutos, 0.0f, 1.0f, 0.0f);
 	glScalef(1.0f, 1.0f, 2.0f);
@@ -134,10 +172,10 @@ void display()
 	glPopMatrix();
 
 	// Dibujo de las horas
-	glColor3f(1.0, 0.0, 1.0);
+	glColor3f(38/256.0f, 115/256.0f, 174/256.0f);
 	glPushMatrix();
 	glRotatef(-alfaHoras, 0.0f, 1.0f, 0.0f);
-	glTranslatef(0.0f, 0.25f, 0.0f);
+	glTranslatef(0.0f, 0.1f, 0.0f);
 	glutSolidCone(0.25, 1, 10, 10);
 	glPopMatrix();
 
@@ -192,9 +230,34 @@ void update()
 	// Tiempo transcurrido
 	float tiempo_transcurrido = (ahora - antes) / 1000.0f;
 
+	cuentaSegundos += tiempo_transcurrido;
+	cuentaMinutos += tiempo_transcurrido;
+	cuentaHoras += tiempo_transcurrido;
+
 	alfaSegundos += omegaSegundos * 360 * tiempo_transcurrido;
 	alfaMinutos += omegaMinutos * 360 * tiempo_transcurrido;
 	alfaHoras += omegaHoras * 360 * tiempo_transcurrido;
+
+	//printf("Tiempo: %f, Cuenta seg: %f\n", tiempo_transcurrido, cuentaSegundos);
+
+	if (cuentaSegundos > 1) {
+		colorAzulHoras = (colorAzulHoras + 0.15);
+		if (colorAzulHoras > 1) colorAzulHoras -= 1;
+		colorRojoHoras = (colorRojoHoras + 0.10);
+		if (colorRojoHoras > 1) colorRojoHoras -= 1;
+		colorVerdeHoras = (colorVerdeHoras + 0.05);
+		if (colorVerdeHoras > 1) colorVerdeHoras -= 1;
+		cuentaSegundos = 0;
+	}
+
+	if (cuentaMinutos > 59*60) {
+		cuentaMinutos = 0;
+	}
+
+	if (cuentaHoras > 59 * 60 * 12) {
+		escala = escala + 1 % 2;
+		cuentaHoras = 0;
+	}
 
 	antes = ahora;
 	// Encolar un evento de redibujo
