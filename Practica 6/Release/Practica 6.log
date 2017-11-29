@@ -10,16 +10,18 @@ C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36)
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(252): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Carretera.cpp(37): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-Carretera.cpp(120): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Carretera.cpp(121): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-Carretera.cpp(129): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-Carretera.cpp(130): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-Carretera.cpp(227): warning C4305: '=': truncamiento de 'double' a 'float'
-Carretera.cpp(232): warning C4305: '=': truncamiento de 'double' a 'float'
+Carretera.cpp(29): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+Carretera.cpp(34): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+Carretera.cpp(80): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+Carretera.cpp(81): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Carretera.cpp(82): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Carretera.cpp(144): warning C4305: '-=': truncamiento de 'double' a 'float'
+Carretera.cpp(147): warning C4305: '+=': truncamiento de 'double' a 'float'
+Carretera.cpp(150): warning C4305: '+=': truncamiento de 'double' a 'float'
+Carretera.cpp(153): warning C4305: '-=': truncamiento de 'double' a 'float'
   Generando código
-  1 of 127 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  4 of 120 functions ( 3.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    24 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Practica 6.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\Practicas SGI\Practica 6\Practica 6.exe
+  Practica 6.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\PracticasSGI\Practica 6\Practica 6.exe

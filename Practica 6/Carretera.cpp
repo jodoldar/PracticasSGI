@@ -7,10 +7,10 @@ Autor: Josep Dols
 
 #define PROYECTO "Interfaz de Conduccion"
 #define tasaFPS 60
-#define Ancho 20
-#define Alto 10
-#define AMPLITUD 100
-#define PERIODO 1000
+#define Ancho 8
+#define Alto 1
+#define AMPLITUD 15
+#define PERIODO 75
 
 #include <iostream>
 #include <sstream>
@@ -20,21 +20,34 @@ Autor: Josep Dols
 
 using namespace std;
 
-GLfloat v0[3] = { 0,0,5 }, v1[3] = { 20,0,5 }, v2[3] = { 20,0,-5 }, v3[3] = { 0,0,-5 };
-GLfloat v0Ini[3] = { 0,0,-5 }, v1Ini[3] = { 0,0,-15 }, v2Ini[3] = { 20,0,-15 }, v3Ini[3] = { 20,0,-5 };
-
-float vecNorm[2] = { 0,0 };
-float vecVel[3] = { 0,0,0 };
-
-float velocidad, difVelocidad, angulo, difAngulo;
-float xCam, xView;
-float zCam, zView;
-
-float xCarr,zCarr;
+float velocidad, angulo;
+float xCam, xTurn;
+float zCam, zTurn;
 
 float derivadaDe(float u)
 {
 	return ((2 * PI*AMPLITUD) / PERIODO)*cos(u*((2 * PI) / PERIODO));
+}
+
+float funcionDe(float u)
+{
+	return AMPLITUD * sin(u * ((2 * PI) / PERIODO));
+}
+
+void updateTitulo()
+{
+	stringstream titulo;
+	titulo << PROYECTO << ". Velocidad: " << velocidad << " m/s";
+	glutSetWindowTitle(titulo.str().c_str());
+}
+
+float *vectorN(float u)
+{
+	float vec[2] = { 0,0 };
+	float base = 1 / (sqrt(1 + pow(derivadaDe(u), 2)));
+	vec[0] = base*-1 * derivadaDe(u);
+	vec[1] = base;
+	return vec;
 }
 
 void init()
@@ -43,101 +56,50 @@ void init()
 	cout << "GL Version " << glGetString(GL_VERSION) << endl;
 
 	glEnable(GL_DEPTH_TEST);
-
-	velocidad = 0; difVelocidad = 0;
-	angulo = 0, difAngulo = 0;
-	xCam = -20;
-	zCam = 0;
-	xView = 25;
-	zView = 0;
-	zCarr = 0;
-	xCarr = 0;
-
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-}
 
-void muestraFPS()
-{
-	static int antes = glutGet(GLUT_ELAPSED_TIME);
-	static int fotogramas = 0;
-	int ahora, tiempo_transcurrido;
-
-	// Cada vez que pase por aqui incremento los fotogramas
-	fotogramas++;
-
-	// Calculo el tiempo transcurrido
-	ahora = glutGet(GLUT_ELAPSED_TIME);
-	tiempo_transcurrido = ahora - antes;
-	// Si ha transcurrido un segundo mostrar los fotogramas
-	if (tiempo_transcurrido >= 1000) {
-		// Modificar la barra de titulos
-		stringstream titulo;
-		titulo << "Practica 6 - FPS = " << fotogramas;
-		//glutSetWindowTitle(titulo.str().c_str());
-		// Reinicio la cuenta de fotogramas
-		fotogramas = 0;
-		antes = ahora;
-	}
+	angulo = atan(funcionDe(Alto)/ Alto);
+	xCam = 0; 
+	xTurn = 0;
+	zCam = 0; 
+	zTurn = 0;
 }
 
 void display()
-// Función de atencion al dibujo
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	velocidad += difVelocidad;
-	if (velocidad < 0) { velocidad = 0; }
+	gluLookAt(xCam, 1, zCam, xTurn, 0, zTurn, 0, 1, 0);
 
-	angulo += difAngulo;
-
-	vecVel[0] = abs(cos(angulo));
-	vecVel[2] = abs(sin(angulo));
-
-	//printf("Angulo: %f Vector 0: %f, Vector 1: %f, Vector 2: %f\n",angulo, vecVel[0], vecVel[1], vecVel[2]);
-	xCam += velocidad;
-	printf("Derivada: %f\n", derivadaDe(xCam));
-
-	
-
-
-	zView = (10 * sin(angulo)) / sin(90 - angulo);
-	gluLookAt(xCam, 10, 0, xView + xCam, 0, 0, 0, 1, 0);
-
-	ejes();
-	glRotatef(90, 0, 1, 0);
-	glTranslatef(-10, 0, 0);
 	glColor3f(0.0f, 0.0f, 0.0f);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glColor3f(0.0f, 0.0f, 0.0f);
-	//quad(v0Ini, v1Ini, v2Ini, v3Ini);
-	for (int i = -1; i <= 20; i++) {
-		vecNorm[0] = (1 / sqrt(1 + pow(derivadaDe(xCam), 2)))*derivadaDe(xCam)*-1;
-		vecNorm[1] = (1 / sqrt(1 + pow(derivadaDe(xCam), 2)));
+	glPolygonMode(GL_FRONT, GL_FILL);
 
-		zCarr = AMPLITUD * sin(xCam*((2 * PI) / PERIODO));
-		xCarr = i*Alto;
+	for (int i = xCam/Alto; i <= 75 + xCam; i++) {
+		float u = i*Alto;
+		float u2 = (i + 1)*Alto;
+		float fDe1 = funcionDe(u);
+		float fDe2 = funcionDe(u2);
+		float * vecN = vectorN(u);
 
-		GLfloat v0Aux[3] = { xCarr - vecNorm[0]*Ancho/2, 0, zCarr - vecNorm[1]*Ancho/2};
-		GLfloat v3Aux[3] = { xCarr + vecNorm[0] * Ancho / 2, 0, zCarr + vecNorm[1] * Ancho / 2 };
+		//GLfloat v0[3] = { u + vecN[0] * Ancho / 2 - 0.0, 0 ,vecN[1] * Ancho / 2 + fDe1 - 0.0};
+		//GLfloat v3[3] = { u - vecN[0] * Ancho / 2 - 0.0, 0 ,vecN[1] * (-1 * Ancho) / 2 + fDe1 - 0.0};
+		//GLfloat v1[3] = { u2 + vecN[0] * Ancho / 2 + 0.0, 0 ,vecN[1] * Ancho / 2 + fDe2 + 0.0 };
+		//GLfloat v2[3] = { u2 - vecN[0] * Ancho / 2 + 0.0, 0 ,vecN[1] * (-1 * Ancho) / 2 + fDe2 + 0.0};
 
-		vecNorm[0] = (1 / sqrt(1 + pow(derivadaDe(xCam+20), 2)))*derivadaDe(xCam+20)*-1;
-		vecNorm[1] = (1 / sqrt(1 + pow(derivadaDe(xCam+20), 2)));
+		GLfloat v0[3] = { u, 0, Ancho / 2 + fDe1 };
+		GLfloat v1[3] = { u2, 0, Ancho / 2 + fDe2 };
+		GLfloat v2[3] = { u2, 0, (-1*Ancho) / 2 + fDe2 };
+		GLfloat v3[3] = { u, 0, (-1*Ancho) / 2 + fDe1 };
 
-		zCarr = AMPLITUD * sin((20+xCam)*((2 * PI) / PERIODO));
-		xCarr = 20 + i*Alto;
+		quad(v0, v1, v2, v3, 10, 5);
 
-		GLfloat v1Aux[3] = { xCarr - vecNorm[0] * Ancho / 2, 0, zCarr - vecNorm[1] * Ancho / 2 };
-		GLfloat v2Aux[3] = { xCarr + vecNorm[0] * Ancho / 2, 0, zCarr + vecNorm[1] * Ancho / 2 };
-		
-		quad(v0Aux, v1Aux, v2Aux, v3Aux);
 	}
 
+	updateTitulo();
 
-	difVelocidad = 0; difAngulo = 0;
-	//glFlush();
 	glutSwapBuffers();
 }
 
@@ -146,117 +108,70 @@ void onReshape(GLint w, GLint h)
 {
 	// Se usa toda el area de dibujo
 	glViewport(0, 0, w, h);
-
 	// Definimos la camara (matriz de proyección)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
 	float ratio = (float)w / h;
-	//cout << "Aspect Ratio: " << ratio << endl;
-
-	/*CAMARA ORTOGRAFICA
-	Ajustamos la vista a la dimension mas pequeña del viewport para
-	poder ver la totalidad de la ventana del mundi real (2x2)
-	if(w<h)
-	glOrtho(-1,1,-1/ratio,1/ratio,0,10);
-	else
-	glOrtho(-1*ratio,1*ratio,-1,1,0,10);
-
-	CAMARA PERSPECTIVA
-	La razon de aspecto se pasa directamente a la camara perspectiva
-	Como damos fijo el angulo vertical,el tamaño del dibujo solo se
-	modifica cuando variamos la altura del viewport.*/
-
-	gluPerspective(45, ratio, 1, 90);
+	// Se usa camara perspectiva
+	gluPerspective(45, ratio, 0.1, 1000);
 }
 
 void update()
 {
-	// Variar la variable entre frames sin control de tiempo
-	//alfa += 0.5;
-	muestraFPS();
-	// Animacion coherente con el tiempo transcurrido
-
 	// Inicialmente la hora de arranque
 	static int antes = glutGet(GLUT_ELAPSED_TIME);
-
 	//Hora actual
 	int ahora = glutGet(GLUT_ELAPSED_TIME);
-
 	// Tiempo transcurrido
 	float tiempo_transcurrido = (ahora - antes) / 1000.0f;
-	antes = ahora;
+	
+	xCam += velocidad * cos(angulo) * tiempo_transcurrido;
+	zCam += velocidad * sin(angulo) * tiempo_transcurrido;
+
+	xTurn = 10000 * cos(angulo);
+	zTurn = 10000 * sin(angulo);
 
 	// Encolar un evento de redibujo
-	glutPostRedisplay();
-}
-
-void onTimer(int tiempo)
-{
-	// Sierve para re arrancar el reloj de cuenta atras
-	glutTimerFunc(tiempo, onTimer, tiempo);
-
-	update();
-}
-
-void onKey(unsigned char tecla, int x, int y) 
-{
-	stringstream titulo;
-	titulo << "Apretada tecla " << tecla;
-	glutSetWindowTitle(titulo.str().c_str());
-
+	antes = ahora;
 	glutPostRedisplay();
 }
 
 void onEspecialKey(int specialKey, int x, int y)
 {
-	stringstream titulo;
 	switch (specialKey)
 	{
 		case GLUT_KEY_LEFT:
-			difAngulo = -0.25;
-			titulo << "Tecla: FLECHA IZQ.";
-			glutSetWindowTitle(titulo.str().c_str());
+			angulo -= 0.25 * PI / 180;
 			break;
 		case GLUT_KEY_RIGHT:
-			difAngulo = 0.25;
-			titulo << "Tecla: FLECHA DER.";
-			glutSetWindowTitle(titulo.str().c_str());
+			angulo += 0.25 * PI / 180;
 			break;
 		case GLUT_KEY_UP:
-			difVelocidad = 0.1;
-			titulo << "Tecla: FLECHA ARRIBA";
-			glutSetWindowTitle(titulo.str().c_str());
+			velocidad += 0.1;
 			break;
 		case GLUT_KEY_DOWN:
-			difVelocidad = -0.1;
-			titulo << "Tecla: FLECHA ABAJO";
-			glutSetWindowTitle(titulo.str().c_str());
+			velocidad -= 0.1;
+			if (velocidad < 0) { velocidad = 0.0; }
 			break;
 		default:
 			break;
 	}
 
-	printf("Velocidad %f, Angulo %f\n", velocidad, angulo);
 	glutPostRedisplay();
 }
 
 void main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH); //GLUT_DOUBLE
-	glutInitWindowSize(400, 400);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(50, 200);
 	glutCreateWindow(PROYECTO);
 	init();
 	glutDisplayFunc(display);
 	glutReshapeFunc(onReshape);
-	//glutIdleFunc(update);
-	
-	glutKeyboardFunc(onKey);
+	glutIdleFunc(update);
 	glutSpecialFunc(onEspecialKey);
-
-	glutTimerFunc(1000 / tasaFPS, onTimer, 1000 / tasaFPS);
-
+	//glutTimerFunc(1000 / tasaFPS, onTimer, 1000 / tasaFPS);
 	glutMainLoop();
 }
