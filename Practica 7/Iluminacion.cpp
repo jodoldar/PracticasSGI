@@ -151,10 +151,11 @@ void display()
 
 	glShadeModel(GL_SMOOTH);
 
-	float despFar = fmod(xCam, 2.5f);
+	float despFar = fmod(xCam, 20.0f);
+	float xFirst = xCam - despFar;
 	printf("%f\n", despFar);
 	for (int j = 0; j < 4; j++) {
-		float x = xCam + despFar*j;
+		float x = xFirst + 20*j;
 		GLfloat positionFarola[] = { x, 4, funcionDe(x),1 };
 		switch (j)
 		{

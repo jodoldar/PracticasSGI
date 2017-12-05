@@ -12,16 +12,16 @@ C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38)
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(252): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
 Iluminacion.cpp(46): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
 Iluminacion.cpp(51): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-Iluminacion.cpp(176): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-Iluminacion.cpp(177): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Iluminacion.cpp(177): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
 Iluminacion.cpp(178): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-Iluminacion.cpp(240): warning C4305: '-=': truncamiento de 'double' a 'float'
-Iluminacion.cpp(243): warning C4305: '+=': truncamiento de 'double' a 'float'
-Iluminacion.cpp(246): warning C4305: '+=': truncamiento de 'double' a 'float'
-Iluminacion.cpp(249): warning C4305: '-=': truncamiento de 'double' a 'float'
+Iluminacion.cpp(179): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Iluminacion.cpp(241): warning C4305: '-=': truncamiento de 'double' a 'float'
+Iluminacion.cpp(244): warning C4305: '+=': truncamiento de 'double' a 'float'
+Iluminacion.cpp(247): warning C4305: '+=': truncamiento de 'double' a 'float'
+Iluminacion.cpp(250): warning C4305: '-=': truncamiento de 'double' a 'float'
   Generando código
-  6 of 126 functions ( 4.8%) were compiled, the rest were copied from previous compilation.
-    4 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  1 of 126 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   Practica 7.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\Practicas SGI\Practica 7\Practica 7.exe
