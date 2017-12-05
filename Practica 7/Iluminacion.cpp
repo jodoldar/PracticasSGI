@@ -7,7 +7,7 @@ Autor: Josep Dols
 
 #define PROYECTO "Interfaz de Conduccion"
 #define tasaFPS 60
-#define Ancho 8
+#define Ancho 4
 #define Alto 1
 #define AMPLITUD 5
 #define PERIODO 175
@@ -29,7 +29,7 @@ GLfloat Dl0[] = { 0.05f ,0.05f ,0.05f ,1.0 };
 GLfloat Sl0[] = { 0.0f , 0.0f ,0.0f, 1.0 };
 GLfloat directionalPosition[] = { 0.0f ,10.0f ,0.0f ,0.0f };
 
-GLfloat Al1[] = { 0.2f ,0.2f ,0.2f, 1.0 };
+GLfloat Al1[] = { 0.02f ,0.02f ,0.02f, 1.0 };
 GLfloat Dl1[] = { 1.0f, 1.0f, 1.0f, 1.0 };
 GLfloat Sl1[] = { 0.3f, 0.3f, 0.3f, 1.0 };
 
@@ -40,6 +40,9 @@ GLfloat directionalFarola[] = { 0.0f, -1.0f, 0.0f, 0.0f };
 
 GLfloat Dm[] = { 0.8f, 0.8f, 0.8f, 1.0 };
 GLfloat Sm[] = { 0.3f, 0.3f, 0.3f, 1.0 };
+
+GLfloat directionalView[] = { 0.0f, -0.5f, -2.0f };
+GLfloat posicionFocal[] = { 0.0f, -0.3f, 0.0f, 1.0f };
 
 float derivadaDe(float u)
 {
@@ -140,9 +143,8 @@ void display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	GLfloat posicionFocal[] = { 0.0f, -0.3f, 0.0f, 1.0f };
+
 	glLightfv(GL_LIGHT1, GL_POSITION, posicionFocal);
-	GLfloat directionalView[] = { 0.0f, 0.0f, -1.0f };
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, directionalView);
 	gluLookAt(xCam, 1, zCam, xTurn, 0, zTurn, 0, 1, 0);
 	
@@ -153,7 +155,7 @@ void display()
 
 	float despFar = fmod(xCam, 20.0f);
 	float xFirst = xCam - despFar;
-	printf("%f\n", despFar);
+
 	for (int j = 0; j < 4; j++) {
 		float x = xFirst + 20*j;
 		GLfloat positionFarola[] = { x, 4, funcionDe(x),1 };
@@ -180,11 +182,6 @@ void display()
 		float fDe1 = funcionDe(u);
 		float fDe2 = funcionDe(u2);
 		float * vecN = vectorN(u);
-
-		//GLfloat v0[3] = { u + vecN[0] * Ancho / 2 - 0.0, 0 ,vecN[1] * Ancho / 2 + fDe1 - 0.0};
-		//GLfloat v3[3] = { u - vecN[0] * Ancho / 2 - 0.0, 0 ,vecN[1] * (-1 * Ancho) / 2 + fDe1 - 0.0};
-		//GLfloat v1[3] = { u2 + vecN[0] * Ancho / 2 + 0.0, 0 ,vecN[1] * Ancho / 2 + fDe2 + 0.0 };
-		//GLfloat v2[3] = { u2 - vecN[0] * Ancho / 2 + 0.0, 0 ,vecN[1] * (-1 * Ancho) / 2 + fDe2 + 0.0};
 
 		GLfloat v0[3] = { u, 0, Ancho / 2 + fDe1 };
 		GLfloat v1[3] = { u2, 0, Ancho / 2 + fDe2 };
@@ -262,7 +259,7 @@ void main(int argc, char** argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(50, 200);
+	//glutInitWindowPosition(50, 200);
 	glutCreateWindow(PROYECTO);
 	init();
 	glutDisplayFunc(display);
