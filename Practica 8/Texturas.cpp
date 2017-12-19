@@ -46,7 +46,12 @@ GLfloat posicionFocal[] = { 0.0f, -0.3f, 0.0f, 1.0f };
 
 static GLuint roadTex;
 static GLuint backTex;
+static GLuint grdTex;
+static GLuint addTex;
+static GLuint posteTex;
 
+int modoNocturo = 0;
+int modoAlambrico = 0;
 
 float derivadaDe(float u)
 {
@@ -74,6 +79,62 @@ float *vectorN(float u)
 	return vec;
 }
 
+void dibujaCartel(float xP, float zP) {
+	if (modoAlambrico) {
+		glPolygonMode(GL_FRONT, GL_LINE);
+		glBegin(GL_QUADS);
+			glVertex3f(10 + xP, 5, -5 + zP);
+			glVertex3f(10 + xP, 10, -5 + zP);
+			glVertex3f(10 + xP, 10, 5 + zP);
+			glVertex3f(10 + xP, 5, 5 + zP);
+		glEnd();
+		glBegin(GL_QUADS);
+			glVertex3f(10 + xP, 0, -0.25 + zP);
+			glVertex3f(10 + xP, 5, -0.25 + zP);
+			glVertex3f(10 + xP, 5, 0.25 + zP);
+			glVertex3f(10 + xP, 0, 0.25 + zP);
+		glEnd();
+	}
+	else {
+		glBindTexture(GL_TEXTURE_2D, addTex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+
+		GLfloat v0[3] = { 10 + xP, 2.5,  -2.5 + zP};
+		GLfloat v1[3] = { 10 + xP, 5, -2.5 + zP };
+		GLfloat v2[3] = { 10 + xP, 5, 2.5 + zP };
+		GLfloat v3[3] = { 10 + xP, 2.5, 2.5 + zP };
+		quadtex(v0, v3, v2, v1, 0.0, 1.0, 0.0, 1.0, 10, 10);
+
+		/*glBegin(GL_QUADS);
+		glTexCoord2f(0, 0); glVertex3f(10 + xP, 5, -5 + zP);
+		glTexCoord2f(0, 1); glVertex3f(10 + xP, 10, -5 + zP);
+		glTexCoord2f(1, 1); glVertex3f(10 + xP, 10, 5 + zP);
+		glTexCoord2f(1, 0); glVertex3f(10 + xP, 5, 5 + zP);
+		glEnd();*/
+
+		glBindTexture(GL_TEXTURE_2D, posteTex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+		GLfloat v0b[3] = { 11 + xP, 0, -0.25 + zP };
+		GLfloat v1b[3] = { 11 + xP, 5, -0.25 + zP };
+		GLfloat v2b[3] = { 11 + xP, 5, 0.25 + zP };
+		GLfloat v3b[3] = { 11 + xP, 0, 0.25 + zP };
+		quadtex(v0b, v3b, v2b, v1b, 0.0, 1.0, 0.0, 1.0, 10, 10);
+
+		/*glBegin(GL_QUADS);
+		glTexCoord2f(0, 0); glVertex3f(10 + xP, 0, -0.25 + zP);
+		glTexCoord2f(0, 1); glVertex3f(10 + xP, 5, -0.25 + zP);
+		glTexCoord2f(1, 1); glVertex3f(10 + xP, 5, 0.25 + zP);
+		glTexCoord2f(1, 0); glVertex3f(10 + xP, 0, 0.25 + zP);
+		glEnd();*/
+	}
+}
+
 void init()
 {
 	cout << "Iniciando " << PROYECTO << endl;
@@ -81,7 +142,7 @@ void init()
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_LIGHTING);
-
+	glShadeModel(GL_SMOOTH);
 
 	glLightfv(GL_LIGHT0, GL_AMBIENT, Al0);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, Dl0);
@@ -130,6 +191,12 @@ void init()
 	glMaterialfv(GL_FRONT, GL_SPECULAR, Sm);
 	glMaterialf(GL_FRONT, GL_SHININESS, 3.0);
 
+	glGenTextures(1, &grdTex);
+	glBindTexture(GL_TEXTURE_2D, grdTex);
+	char nombreGrd[] = "./GroundTexture.jpg";
+	loadImageFile(nombreGrd);
+	glEnable(GL_TEXTURE_2D);
+
 	glGenTextures(1, &roadTex);
 	glBindTexture(GL_TEXTURE_2D, roadTex);
 	char nombre[] = "./RoadTexture.jpg";
@@ -140,7 +207,20 @@ void init()
 	glBindTexture(GL_TEXTURE_2D, backTex);
 	char nombreBack[] = "./BackTexture.jpg";
 	loadImageFile(nombreBack);
-	glEdgeFlag(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
+
+	glGenTextures(1, &addTex);
+	glBindTexture(GL_TEXTURE_2D, addTex);
+	char nombreAdd[] = "./PubliTexture.jpg";
+	loadImageFile(nombreAdd);
+	glEnable(GL_TEXTURE_2D);
+
+	glGenTextures(1, &posteTex);
+	glBindTexture(GL_TEXTURE_2D, posteTex);
+	char nombrePoste[] = "./posteTexture.jpg";
+	loadImageFile(nombrePoste);
+	glEnable(GL_TEXTURE_2D);
+
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -153,23 +233,61 @@ void init()
 
 void display()
 {
+	if (modoNocturo) {
+		glClearColor(0, 0, 0, 1);
+		glEnable(GL_LIGHTING);
+	}
+	else {
+		glClearColor(1, 1, 1, 1);
+		glDisable(GL_LIGHTING);
+	}
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDisable(GL_LIGHTING);
 
-	glPushMatrix();
-	GLUquadricObj *quadratic;
-	quadratic = gluNewQuadric();
-	//glTranslatef(xCam, -40, zCam);
-	//glRotatef(-90, 1, 0, 0);
-	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, backTex);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-	//gluQuadricTexture(quadratic, true);
-	glutSolidCylinder(150, 200, 60, 60);
-	//gluCylinder(quadratic, 150, 150, 200, 60, 60);
-	glPopMatrix();
+	if (modoNocturo) {
+		// Textura para la noche
+	}
+	else {
+		glBindTexture(GL_TEXTURE_2D, backTex);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	}
+
+	texturarFondo();
+
+	if (!modoAlambrico) {
+		if (!modoNocturo) {
+			glPushMatrix();
+			GLUquadricObj *quadratic;
+			quadratic = gluNewQuadric();
+			glTranslatef(xCam, -40, zCam);
+			glRotatef(-90, 1, 0, 0);
+			glEnable(GL_TEXTURE_2D);
+			//glBindTexture(GL_TEXTURE_2D,nightSky);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+			gluQuadricTexture(quadratic, true);
+			gluCylinder(quadratic, 150, 150, 110, 60, 60);
+			glPopMatrix();
+		}
+		else {
+			glPushMatrix();
+			GLUquadricObj *quadratic;
+			quadratic = gluNewQuadric();
+			glTranslatef(0.0f, -40.0f, 0.0f);
+			glRotatef(-90, 1, 0, 0);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, backTex);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+			gluQuadricTexture(quadratic, true);
+			gluCylinder(quadratic, 150, 150, 2500, 60, 60);
+			glPopMatrix();
+		}
+	}
+
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -180,29 +298,50 @@ void display()
 	gluLookAt(xCam, 1, zCam, xTurn, 0, zTurn, 0, 1, 0);
 
 	//glColor3f(0.0f, 0.0f, 0.0f);
-	glPolygonMode(GL_FRONT, GL_FILL);
 
-	glShadeModel(GL_SMOOTH);
 
-	float despFar = fmod(xCam, 20.0f);
+
+
+	float despFar = fmod(xCam, 50.0f);
 	float xFirst = xCam - despFar;
 
 	for (int j = 0; j < 4; j++) {
-		float x = xFirst + 20 * j;
+		float x = xFirst + 50 * j;
 		GLfloat positionFarola[] = { x, 4, funcionDe(x),1 };
 		switch (j)
 		{
 		case 0:
-			glLightfv(GL_LIGHT2, GL_POSITION, positionFarola);
+			if (modoNocturo) {
+				glLightfv(GL_LIGHT2, GL_POSITION, positionFarola);
+			}
+			else {
+				dibujaCartel(x, funcionDe(x)+Ancho);
+			}			
 			break;
 		case 1:
-			glLightfv(GL_LIGHT3, GL_POSITION, positionFarola);
+			if (modoNocturo) {
+				glLightfv(GL_LIGHT3, GL_POSITION, positionFarola);
+			}
+			else {
+				dibujaCartel(x, funcionDe(x) + Ancho);
+			}
 			break;
 		case 2:
-			glLightfv(GL_LIGHT4, GL_POSITION, positionFarola);
+			if (modoNocturo) {
+				glLightfv(GL_LIGHT4, GL_POSITION, positionFarola);
+			}
+			else {
+				dibujaCartel(x, funcionDe(x) + Ancho);
+			}
 			break;
 		case 3:
-			glLightfv(GL_LIGHT5, GL_POSITION, positionFarola);
+			if (modoNocturo) {
+				glLightfv(GL_LIGHT5, GL_POSITION, positionFarola);
+			}
+			else {
+				dibujaCartel(x, funcionDe(x) + Ancho);
+			}
+
 			break;
 		}
 	}
@@ -219,14 +358,21 @@ void display()
 		GLfloat v2[3] = { u2, 0, (-1 * Ancho) / 2 + fDe2 };
 		GLfloat v3[3] = { u, 0, (-1 * Ancho) / 2 + fDe1 };
 
-		//quad(v0, v1, v2, v3, 100, 100);
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, roadTex);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-		quadtex(v3, v0, v1, v2, 0.0, 1.0, 0.0, 1.0, 10, 10);
+		if (modoAlambrico) {
+			glPolygonMode(GL_FRONT, GL_LINE);
+			quad(v0, v1, v2, v3, 100, 100);
+		}
+		else {
+			glPolygonMode(GL_FRONT, GL_FILL);
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, roadTex);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+			quadtex(v3, v0, v1, v2, 0.0, 1.0, 0.0, 1.0, 10, 10);
 
+		}
+		
 	}
 
 	updateTitulo();

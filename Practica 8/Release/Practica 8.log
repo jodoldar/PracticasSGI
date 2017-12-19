@@ -10,21 +10,38 @@ C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36)
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
 C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(252): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Texturas.cpp(53): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
 Texturas.cpp(58): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-Texturas.cpp(143): warning C4305: 'argumento': truncamiento de 'int' a 'GLboolean'
-Texturas.cpp(143): warning C4309: 'argumento': truncamiento de valor constante
-Texturas.cpp(210): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-Texturas.cpp(211): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-Texturas.cpp(212): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-Texturas.cpp(275): warning C4305: '-=': truncamiento de 'double' a 'float'
-Texturas.cpp(278): warning C4305: '+=': truncamiento de 'double' a 'float'
-Texturas.cpp(281): warning C4305: '+=': truncamiento de 'double' a 'float'
-Texturas.cpp(284): warning C4305: '-=': truncamiento de 'double' a 'float'
-Texturas.cpp(303): warning C4326: el tipo de valor devuelto de 'main' debe ser 'int' en lugar de 'void'
+Texturas.cpp(63): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+Texturas.cpp(92): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(93): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(94): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(95): warning C4244: 'argumento': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(105): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(105): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(106): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(106): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(107): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(107): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(108): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(108): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(123): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(123): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(124): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(124): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(125): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(125): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(126): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Texturas.cpp(126): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Texturas.cpp(349): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+Texturas.cpp(350): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Texturas.cpp(351): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Texturas.cpp(421): warning C4305: '-=': truncamiento de 'double' a 'float'
+Texturas.cpp(424): warning C4305: '+=': truncamiento de 'double' a 'float'
+Texturas.cpp(427): warning C4305: '+=': truncamiento de 'double' a 'float'
+Texturas.cpp(430): warning C4305: '-=': truncamiento de 'double' a 'float'
   Generando código
-  2 of 126 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+  2 of 127 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  Practica 8.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\Practicas SGI\Practica 8\Practica 8.exe
+  Practica 8.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\PracticasSGI\Practica 8\Practica 8.exe

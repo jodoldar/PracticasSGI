@@ -1,27 +1,2 @@
 ﻿  Iluminacion.cpp
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(29): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(29): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(30): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(30): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(35): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(35): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
-C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(252): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-Iluminacion.cpp(49): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-Iluminacion.cpp(54): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
-Iluminacion.cpp(179): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-Iluminacion.cpp(180): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-Iluminacion.cpp(181): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-Iluminacion.cpp(238): warning C4305: '-=': truncamiento de 'double' a 'float'
-Iluminacion.cpp(241): warning C4305: '+=': truncamiento de 'double' a 'float'
-Iluminacion.cpp(244): warning C4305: '+=': truncamiento de 'double' a 'float'
-Iluminacion.cpp(247): warning C4305: '-=': truncamiento de 'double' a 'float'
-  Generando código
-  2 of 122 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Generación de código finalizada
-  Practica 7.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\Practicas SGI\Practica 7\Practica 7.exe
+c:\users\josep\documents\visual studio 2017\projects\gl\include\gl\freeglut_std.h(63): fatal error C1083: No se puede abrir el archivo incluir: 'windows.h': No such file or directory
