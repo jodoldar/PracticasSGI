@@ -1,0 +1,59 @@
+﻿  Videojuego.cpp
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(29): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(29): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(30): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(30): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(35): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(35): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(36): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4838: la conversión de 'double' en 'const GLfloat' requiere una conversión de restricción
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(38): warning C4305: 'inicializando': truncamiento de 'double' a 'const GLfloat'
+C:\Users\Josep\Documents\Visual Studio 2017\Projects\GL\include\Utilidades.h(252): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+Videojuego.cpp(65): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+Videojuego.cpp(70): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+Videojuego.cpp(94): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(94): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(95): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(95): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(96): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(96): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(97): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(97): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(100): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(100): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(101): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(101): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(102): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(102): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(103): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(103): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(113): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(113): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(114): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(114): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(115): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(115): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(116): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(116): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(124): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(124): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(125): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(125): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(126): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(126): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(127): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
+Videojuego.cpp(127): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+Videojuego.cpp(374): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+Videojuego.cpp(375): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Videojuego.cpp(376): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Videojuego.cpp(444): warning C4305: '-=': truncamiento de 'double' a 'float'
+Videojuego.cpp(447): warning C4305: '+=': truncamiento de 'double' a 'float'
+Videojuego.cpp(450): warning C4305: '+=': truncamiento de 'double' a 'float'
+Videojuego.cpp(453): warning C4305: '-=': truncamiento de 'double' a 'float'
+  Generando código
+  3 of 127 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+  Practica 9.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\PracticasSGI\Practica 9\Practica 9.exe
