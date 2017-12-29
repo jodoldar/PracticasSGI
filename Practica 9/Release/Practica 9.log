@@ -44,16 +44,16 @@ Videojuego.cpp(126): warning C4838: la conversión de 'double' en 'GLfloat' requ
 Videojuego.cpp(126): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
 Videojuego.cpp(127): warning C4838: la conversión de 'double' en 'GLfloat' requiere una conversión de restricción
 Videojuego.cpp(127): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-Videojuego.cpp(374): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-Videojuego.cpp(375): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-Videojuego.cpp(376): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-Videojuego.cpp(444): warning C4305: '-=': truncamiento de 'double' a 'float'
-Videojuego.cpp(447): warning C4305: '+=': truncamiento de 'double' a 'float'
-Videojuego.cpp(450): warning C4305: '+=': truncamiento de 'double' a 'float'
-Videojuego.cpp(453): warning C4305: '-=': truncamiento de 'double' a 'float'
+Videojuego.cpp(380): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+Videojuego.cpp(381): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Videojuego.cpp(382): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+Videojuego.cpp(450): warning C4305: '-=': truncamiento de 'double' a 'float'
+Videojuego.cpp(453): warning C4305: '+=': truncamiento de 'double' a 'float'
+Videojuego.cpp(456): warning C4305: '+=': truncamiento de 'double' a 'float'
+Videojuego.cpp(459): warning C4305: '-=': truncamiento de 'double' a 'float'
   Generando código
-  3 of 127 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
+  1 of 127 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   Practica 9.vcxproj -> C:\Users\Josep\Documents\Visual Studio 2017\Projects\PracticasSGI\Practica 9\Practica 9.exe

@@ -230,7 +230,7 @@ void init()
 	loadImageFile(nombreNight);
 	glEnable(GL_TEXTURE_2D);
 
-
+	glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	angulo = atan(funcionDe(Alto) / Alto);
@@ -242,6 +242,7 @@ void init()
 
 void display()
 {
+	
 	if (modoNocturo) {
 		//Modo NOCTURNO
 		glClearColor(0, 0, 0, 1);
@@ -249,13 +250,14 @@ void display()
 	}
 	else {
 		//Modo DIURNO
-		glClearColor(1, 1, 1, 1);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glDisable(GL_LIGHTING);
 	}
 
 	if (modoAlambrico) {
-		glClearColor(0, 0, 0, 1);
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glDisable(GL_TEXTURE_2D);
+		glColor3f(0.0f, 0.0f, 0.0f);
 	}
 	else {
 		glEnable(GL_TEXTURE_2D);
@@ -315,18 +317,22 @@ void display()
 		//MODO ALAMBRICO
 		glPolygonMode(GL_FRONT, GL_LINE);
 		glPushMatrix();
-		GLUquadricObj *quadratic;
-		quadratic = gluNewQuadric();
 		glTranslatef(xCam, -64.0f, zCam);
 		glRotatef(-90, 1, 0, 0);
-		gluCylinder(quadratic, 150, 150, 130, 60, 60);
+		glutWireCylinder(150, 130, 60, 60);
 		glPopMatrix();
 	}
 
+	
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	//DIBUJO DEL HUD
+	glPushMatrix();
+	glTranslatef(-0.75f, -0.75f, -3.0f);
+	glutSolidCube(0.35);
+	glPopMatrix();
 
 	glLightfv(GL_LIGHT1, GL_POSITION, posicionFocal);
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, directionalView);
@@ -384,9 +390,9 @@ void display()
 		GLfloat v3[3] = { u, 0, (-1 * Ancho) / 2 + fDe1 };
 
 		if (modoAlambrico) {
-			glPolygonMode(GL_FRONT, GL_LINE);
 			glDisable(GL_TEXTURE_2D);
-			quad(v0, v1, v2, v3, 100, 100);
+			glPolygonMode(GL_FRONT, GL_LINE);
+			quad(v0, v1, v2, v3, 5, 5);
 		}
 		else {
 			glPolygonMode(GL_FRONT, GL_FILL);
