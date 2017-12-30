@@ -24,6 +24,7 @@ using namespace std;
 float velocidad, angulo;
 float xCam, xTurn;
 float zCam, zTurn;
+float zCamAux;
 
 GLfloat Al0[] = { 0.05f ,0.05f ,0.05f ,1.0 };
 GLfloat Dl0[] = { 0.05f ,0.05f ,0.05f ,1.0 };
@@ -86,6 +87,72 @@ float *vectorN(float u)
 	return vec;
 }
 
+void dibujaVelocidad() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDepthMask(GL_FALSE);
+	glPushMatrix();
+	glColor4f(1.0f, 0.0f, 0.0f, 0.6f);
+	if (modoAlambrico) {
+		glPolygonMode(GL_FRONT, GL_LINE);
+	}
+	else {
+		glPolygonMode(GL_FRONT, GL_FILL);
+	}
+	glBegin(GL_POLYGON);
+	glVertex3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.99f + velocidad/30, 0.0f, 0.0f);
+	glVertex3f(-0.99f + velocidad/30, 1.0f, 0.0f);
+	glVertex3f(-1.0f, 1.0f, 0.0f);
+	glEnd();
+	glPopMatrix();
+	glDepthMask(GL_TRUE);
+	glDisable(GL_BLEND);
+	if (modoAlambrico) {
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glColor3f(0.0f, 0.0f, 0.0f);
+	}
+	else {
+		glColor3f(1.0f, 1.0f, 1.0f);
+	}
+}
+
+void dibujaFlecha(float escala) {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDepthMask(GL_FALSE);
+	glPushMatrix();
+	glColor4f(1.0f, 1.0f, 0.0f, 0.5f);
+	glScalef(escala, escala, escala);
+	if (modoAlambrico) {
+		glPolygonMode(GL_FRONT, GL_LINE);
+	}
+	else {
+		glPolygonMode(GL_FRONT, GL_FILL);
+	}
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.4f, -0.5, 0.0f);
+	glVertex3f(0.4f, -0.5f, 0.0f);
+	glVertex3f(0.4f, 0.25f, 0.0f);
+	glVertex3f(-0.4f, 0.25f, 0.0f);
+	glEnd();
+	glBegin(GL_POLYGON);
+	glVertex3f(-1.0f, 0.25f, 0.0f);
+	glVertex3f(1.0f, 0.25f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glEnd();
+	glPopMatrix();
+	glDepthMask(GL_TRUE);
+	glDisable(GL_BLEND);
+	if (modoAlambrico) {
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		glColor3f(0.0f, 0.0f, 0.0f);
+	}
+	else {
+		glColor3f(1.0f, 1.0f, 1.0f);
+	}
+}
+
 void dibujaCartel(float xP, float zP) {
 	if (modoAlambrico) {
 		// Modo alambrico
@@ -108,7 +175,7 @@ void dibujaCartel(float xP, float zP) {
 		glBindTexture(GL_TEXTURE_2D, addTex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 		GLfloat v0[3] = { 10 + xP, 2.5,  -2.5 + zP };
 		GLfloat v1[3] = { 10 + xP, 5, -2.5 + zP };
@@ -119,7 +186,7 @@ void dibujaCartel(float xP, float zP) {
 		glBindTexture(GL_TEXTURE_2D, posteTex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
 		GLfloat v0b[3] = { 11 + xP, 0, -0.25 + zP };
 		GLfloat v1b[3] = { 11 + xP, 5, -0.25 + zP };
@@ -192,7 +259,7 @@ void init()
 
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, Dm);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, Sm);
-	glMaterialf(GL_FRONT, GL_SHININESS, 3.0);
+	glMaterialf(GL_FRONT, GL_SHININESS, 0.3f);
 
 	glGenTextures(1, &grdTex);
 	glBindTexture(GL_TEXTURE_2D, grdTex);
@@ -257,10 +324,12 @@ void display()
 	if (modoAlambrico) {
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glDisable(GL_TEXTURE_2D);
+		glDisable(GL_LIGHTING);
 		glColor3f(0.0f, 0.0f, 0.0f);
 	}
 	else {
 		glEnable(GL_TEXTURE_2D);
+		glColor3f(1.0f, 1.0f, 1.0f);
 	}
 
 	if (modoNiebla) {
@@ -285,13 +354,14 @@ void display()
 			glPushMatrix();
 			GLUquadricObj *quadratic;
 			quadratic = gluNewQuadric();
-			glTranslatef(xCam, -64, zCam);
+			glTranslatef(0.0f, -64.0f, 0.0f);
 			glRotatef(-90, 1, 0, 0);
+			glRotatef(90 + (zTurn / 360), 0, 0, 1);
 			glEnable(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D,nightTex);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			gluQuadricTexture(quadratic, true);
 			gluCylinder(quadratic, 150, 150, 130, 60, 60);
 			glPopMatrix();
@@ -301,13 +371,14 @@ void display()
 			glPushMatrix();
 			GLUquadricObj *quadratic;
 			quadratic = gluNewQuadric();
-			glTranslatef(xCam, -64.0f, zCam);
+			glTranslatef(0.0f, -64.0f, 0.0f);
 			glRotatef(-90, 1, 0, 0);
+			glRotatef(90 + (zTurn/360), 0, 0, 1);
 			glEnable(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, backTex);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			gluQuadricTexture(quadratic, true);
 			gluCylinder(quadratic, 150, 150, 130, 60, 60);
 			glPopMatrix();
@@ -317,7 +388,7 @@ void display()
 		//MODO ALAMBRICO
 		glPolygonMode(GL_FRONT, GL_LINE);
 		glPushMatrix();
-		glTranslatef(xCam, -64.0f, zCam);
+		glTranslatef(0.0f, -64.0f, 0.0f);
 		glRotatef(-90, 1, 0, 0);
 		glutWireCylinder(150, 130, 60, 60);
 		glPopMatrix();
@@ -328,11 +399,6 @@ void display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	//DIBUJO DEL HUD
-	glPushMatrix();
-	glTranslatef(-0.75f, -0.75f, -3.0f);
-	glutSolidCube(0.35);
-	glPopMatrix();
 
 	glLightfv(GL_LIGHT1, GL_POSITION, posicionFocal);
 	glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, directionalView);
@@ -389,10 +455,16 @@ void display()
 		GLfloat v2[3] = { u2, 0, (-1 * Ancho) / 2 + fDe2 };
 		GLfloat v3[3] = { u, 0, (-1 * Ancho) / 2 + fDe1 };
 
+		GLfloat v0ba[3] = { u, -0.001, 100 };
+		GLfloat v1ba[3] = { u2, -0.001, 100 };
+		GLfloat v2ba[3] = { u2, -0.001, -100 };
+		GLfloat v3ba[3] = { u, -0.001, -100 };
+
 		if (modoAlambrico) {
 			glDisable(GL_TEXTURE_2D);
 			glPolygonMode(GL_FRONT, GL_LINE);
 			quad(v0, v1, v2, v3, 5, 5);
+			quad(v0ba, v1ba, v2ba, v3ba, 5, 5);
 		}
 		else {
 			glPolygonMode(GL_FRONT, GL_FILL);
@@ -400,11 +472,58 @@ void display()
 			glBindTexture(GL_TEXTURE_2D, roadTex);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-			quadtex(v3, v0, v1, v2, 0.0, 1.0, 0.0, 1.0, 10, 10);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+			quadtex(v3, v0, v1, v2, 0.0, 1.0, 0.0, 1.0, 100, 100);
+
+			glBindTexture(GL_TEXTURE_2D, grdTex);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+			quadtex(v3ba, v0ba, v1ba, v2ba, 0.0, 10.0, 0.0, 10.0, 10, 10);
 		}
 	}
 
+	//glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	if (verHud) {
+		//DIBUJO DEL HUD
+		glDisable(GL_TEXTURE_2D);
+		glDisable(GL_LIGHTING);
+		glPushMatrix();
+			glTranslatef(0.75f, -0.75f, -3.0f);
+			glPushMatrix();
+				glScalef(0.8*0.5, 2.5, 1);
+				glRotatef(-90, 1.0f, 0.0f, 0.0f);
+				glRotatef(-zTurn/60, 0.0f, 0.0f, 1.0f);
+				dibujaFlecha(0.5);
+			glPopMatrix();
+			glPushMatrix();
+				glTranslatef(-0.75f, -0.25f, 0.0f);
+				glScalef(1.0f, 0.25f, 1.0f);
+				dibujaVelocidad();
+			glPopMatrix();
+			glPushMatrix();
+				string vel = "Velocidad";
+				char* velC = (char*)vel.c_str();
+				glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+				glTranslatef(-1.75, 0.01f, 0.0f);
+				glRasterPos3f(0.0, 0.0, 0.0);
+				for (; *velC != '\0'; velC++) {
+					glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *velC);
+				}
+			glPopMatrix();
+			glPushMatrix();
+				string dir = "Direccion";
+				char* dirC = (char*)dir.c_str();
+				glColor4f(1.0f, 1.0f, 0.0f, 1.0f);
+				glTranslatef(-0.2f, -0.2f, 0.0f);
+				glRasterPos3f(0.0, 0.0, 0.0);
+				for (; *dirC != '\0'; dirC++) {
+					glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *dirC);
+				}
+			glPopMatrix();
+		glPopMatrix();
+	}
 	updateTitulo();
 	glutSwapBuffers();
 }
@@ -432,7 +551,17 @@ void update()
 	float tiempo_transcurrido = (ahora - antes) / 1000.0f;
 
 	xCam += velocidad * cos(angulo) * tiempo_transcurrido;
-	zCam += velocidad * sin(angulo) * tiempo_transcurrido;
+	zCamAux = zCam + velocidad * sin(angulo) * tiempo_transcurrido;
+
+	if (zCamAux > (funcionDe(xCam) + Ancho / 2) || zCamAux < (funcionDe(xCam) - Ancho / 2)) {
+		//Fuera de los limites
+		//velocidad -= 0.1;
+		//if (velocidad < 0) { velocidad = 0.0; }
+		zCam = zCamAux;
+	}
+	else {
+		zCam = zCamAux;
+	}
 
 	xTurn = 10000 * cos(angulo);
 	zTurn = 10000 * sin(angulo);
